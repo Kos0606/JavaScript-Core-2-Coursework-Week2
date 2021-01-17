@@ -1,5 +1,14 @@
 function readingList(books) {
   // Write your code here...
+  let content = document.querySelector("#content");
+  for(let n of books) {
+    let listOfBooks = document.createElement("p");
+    let unorderedListTag = document.createElement("ul");
+    let booksList = document.createElement("li");
+    let image = document.createElement("img");
+    booksList.innerText = `${n.title} ${n.author}`;
+    booksList.style.backgroundColor = 
+  }
 }
 
 const books = [
