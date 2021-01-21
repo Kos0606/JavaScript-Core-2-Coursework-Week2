@@ -9,7 +9,7 @@ function readingList(books) {
   
     let image = document.createElement("img");  
 let imageArray = ["https://images-na.ssl-images-amazon.com/images/I/410RTQezHYL._SX326_BO1,204,203,200_.jpg", "https://images-na.ssl-images-amazon.com/images/I/41m1rQjm5tL._SX322_BO1,204,203,200_.jpg", "https://images-eu.ssl-images-amazon.com/images/I/71Nxk9VhSTL.SR160,240_BG243,243,243.jpg"];
-for(i = 0; i < imageArray.length; i++) {
+for(let i = 0; i < imageArray.length; i++) {
   image.src = imageArray[i];
   }
   
