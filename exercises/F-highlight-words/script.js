@@ -1,5 +1,101 @@
 function highlightWords(paragraph, colours) {
   // Write your code here...
+
+  function createColoursDropdown(colours) {
+  // create the drop down label
+  let dropDownLabel = document.createElement("label");
+  dropDownLabel.innerHTML = "Chose a colour : ";
+  dropDownLabel.for = "colours";
+
+  // create the drop down list
+  let dropDownList = document.createElement("select");
+  dropDownList.id = "colours";
+
+  // add the option tags for the colours
+  for(let i = 0; i < colours.length; i++) {
+    let dropDownItem = document.createElement("option");
+    dropDownItem.innerHTML = colours[i].toUpperCase();
+    // append the option ta to select tag
+    dropDownList.appendChild(dropDownItem);
+  }
+
+  // create a dropdown object which can then be returned by the function
+  let dropDown = {
+    label: dropDownLabel,
+    select: dropDownList
+  };
+
+  return dropDown;
+}
+
+/*
+ * Function to create a paragraph tag with each word in its own <span>
+ * Returns a <p> tag.
+ */
+function createParaWithSpan(paragraph) {
+  // split the paragraph into an array of words
+  let words = paragraph.split(" ");
+
+  // create the <p> tag to store words
+  let paraTag = document.createElement("p");
+
+  // add each word to its own <span> and append it to <p>
+  for(let i = 0; i < words.length; i++) {
+    let wordSpan = document.createElement("span");
+    wordSpan.innerHTML = words[i] + " ";
+
+    paraTag.appendChild(wordSpan);
+  }
+
+  // return the <p> tag
+  return paraTag;
+}
+
+/*
+ * Function to add an event listener to all the <span> tags of a given <p> tag
+ * to change the background colour of <span> based on the current value
+ * of the <select> tag.
+ * Returns nothing
+ */
+function addParaEventListener(paraTag, dropDown) {
+  let paraSpans = paraTag.childNodes;
+
+  for(let i = 0; i < paraSpans.length; i++) {
+    paraSpans[i].addEventListener("click", function() {
+      if(dropDown.select.value.toLowerCase() === "none") {
+        this.style.backgroundColor="";
+      }
+      else {
+        this.style.backgroundColor = dropDown.select.value;
+      }
+    });
+  }
+}
+
+/*
+ * Function to render the 'paragraph' on the webpage and
+ * highlight the words of the 'paragraph' based on the value selected
+ * in the drop down list created using the 'colours' array
+ */
+function highlightWords(paragraph, colours) {
+  // Write your code here...
+  // get the content of the webpage in a variable
+  let content = document.getElementById("content");
+
+  // create the <select> and <label> tags for the dropdown
+  let dropDown = createColoursDropdown(colours);
+
+  // create the <p> tag to render on the webpage
+  let paraTag = createParaWithSpan(paragraph);
+
+  // add the event listener to the <p> tag dependent on the <select>'s value
+  addParaEventListener(paraTag, dropDown);
+
+  // append all the components to the content
+  content.appendChild(paraTag);
+  content.appendChild(dropDown.label);
+  content.appendChild(dropDown.select);
+}
 }
 
 const paragraph =
